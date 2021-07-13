@@ -1,0 +1,37 @@
+---
+testtopic1:
+  partitions: 1
+  replication: 1
+  config:
+    message.format.version: "2.3-IV1"
+    max.compaction.lag.ms: "9223372036854775807"
+    max.message.bytes: "1000012"
+    min.compaction.lag.ms: "0"
+    message.timestamp.type: "CreateTime"
+    min.insync.replicas: "1"
+    retention.bytes: "-1"
+    delete.retention.ms: "86400000"
+    cleanup.policy: "compact"
+    segment.bytes: "1073741824"
+    retention.ms: "604800000"
+    segment.ms: "604800000"
+    message.timestamp.difference.max.ms: "9223372036854775807"
+    flush.messages: "9223372036854775807"
+testtopic2:
+  partitions: 1
+  replication: 1
+  config:
+    message.format.version: "2.3-IV1"
+    max.compaction.lag.ms: "9223372036854775807"
+    max.message.bytes: "1000012"
+    min.compaction.lag.ms: "0"
+    message.timestamp.type: "CreateTime"
+    min.insync.replicas: "2"
+    retention.bytes: "10737418240"
+    delete.retention.ms: "86400000"
+    cleanup.policy: "delete"
+    segment.bytes: "1073741824"
+    retention.ms: "2592000000"
+    segment.ms: "604800000"
+    message.timestamp.difference.max.ms: "9223372036854775807"
+    flush.messages: "9223372036854775807"

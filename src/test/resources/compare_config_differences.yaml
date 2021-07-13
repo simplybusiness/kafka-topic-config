@@ -1,0 +1,11 @@
+---
+testtopic2:
+  partitions: 0
+  replication: 1
+  config:
+    segment.ms: "704800000"
+
+testtopic1:
+  partitions: 0
+  replication: 3
+  config:
