@@ -22,7 +22,22 @@ This is really it. The project come out of a need to do everything we can using 
 
 ## 🐾 Examples
 
+        // create a new topicManager
+        Properties props = new Properties();
+        props.setProperty("bootstrap.servers","localhost:9092");
+        TopicsManager topicManager = new TopicsManager(props);
 
+        // apply config to kafka
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        String file = classloader.getResource("example.yaml").getFile();
+        topicManager.updateKafkaFromConfigFile(file);
+
+        // get the topic config from kafka
+        Map<String, YamlTopicConfig> topicConfigs = topicManager.topicListing();
+
+        //save the configs to a yaml file
+        File f = File.createTempFile("kafka-topics", "yaml");
+        topicManager.saveToFile(topicConfigs, f);
 
 
 
