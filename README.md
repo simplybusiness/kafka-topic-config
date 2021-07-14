@@ -45,7 +45,9 @@ For more information, please refer to the Contributing section.
 
 ## 💬 Contributing
 
-We'd love you too.
+We would welcome additions, bugfixes or documentation.
+
+Please note that this project is released with a Contributor Code of Conduct. By participating in this project, you agree to abide by its terms. The Code of Conduct can be found [here](CODE_OF_CONDUCT.md).
 
 ## 🚀 Used By
 
