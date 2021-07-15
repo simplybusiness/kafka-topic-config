@@ -24,6 +24,7 @@ plugins {
 	id("java-library")
 	id("net.researchgate.release") version "2.6.0"
 	id("com.adarshr.test-logger") version "2.1.1"
+	id("maven-publish")
 }
 
 group = "com.simplybusiness"
