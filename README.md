@@ -1,4 +1,5 @@
-## kafka-topic-config
+# kafka-topic-config
+[![Java CI with Gradle](https://github.com/simplybusiness/kafka-topic-config/actions/workflows/gradle.yml/badge.svg)](https://github.com/simplybusiness/kafka-topic-config/actions/workflows/gradle.yml)
 
 > Save, edit, apply Kafka topic configurations from yaml
 
