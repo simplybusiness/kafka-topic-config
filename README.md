@@ -15,6 +15,10 @@
 - [License](#-license)
 
 
+## Artifacts
+
+[On maven central](https://search.maven.org/artifact/com.simplybusiness/kafka-topic-config/1.0.0/jar)
+
 ## 📦 Packages
 
 com.simplybusiness.dna.common.topics

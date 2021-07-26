@@ -24,10 +24,12 @@ plugins {
 	id("java-library")
 	id("net.researchgate.release") version "2.6.0"
 	id("com.adarshr.test-logger") version "2.1.1"
+	id("signing")
+	id("java")
 }
 
 group = "com.simplybusiness"
-version = "0.0.2-SNAPSHOT"
+version = "1.0.0"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 
@@ -60,7 +62,8 @@ val jar: Jar by tasks
 jar.enabled = true
 
 java {
-
+	withSourcesJar()
+	withJavadocJar()
 }
 
 val afterReleaseBuild by tasks.existing
@@ -72,20 +75,67 @@ tasks.withType<JavaCompile> {
 	}
 }
 
+
+signing {
+	sign(configurations.archives.get())
+}
+
 publishing {
-	repositories {
-		maven {
-			name = "GitHubPackages"
-			url = uri("https://maven.pkg.github.com/simplybusiness/kafka-topic-config")
-			credentials {
-				username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-				password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+	publications {
+		create<MavenPublication>("kafka-topic-config") {
+			from(components["java"])
+
+//			artifact(tasks["sourcesJar"])
+//			artifact(tasks["javadocJar"])
+
+			repositories {
+				maven {
+					credentials {
+						username = project.property("ossrhUsername").toString()
+						password = project.property("ossrhPassword").toString()
+					}
+
+					//s01.oss.sonatype.org
+					val releasesRepoUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+					val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+					url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
+				}
+			}
+
+			pom {
+				name.set("kafka-topic-config")
+				description.set("support for yaml based Kafka topic configuration")
+				url.set("https://github.com/simplybusiness/kafka-topic-config")
+
+				licenses {
+					license {
+						name.set("MIT License")
+						url.set("https://github.com/simplybusiness/kafka-topic-config#-license")
+					}
+				}
+
+				developers {
+					developer {
+						id.set("jameswalkerdine")
+						name.set("JamesWalkerdine")
+						email.set("kafkatopicconfig@simplybusiness.co.uk")
+						url.set("https://github.com/jameswalkerdine")
+						roles.addAll("developer")
+						timezone.set("Europe/London")
+					}
+				}
+
+				scm {
+					connection.set("scm:git:https://github.com/simplybusiness/kafka-topic-config.git")
+					developerConnection.set("scm:git:ssh://github.com:jameswalkerdine/kafka-topic-config.git")
+					url.set("https://github.com/simplybusiness/kafka-topic-config")
+				}
 			}
 		}
 	}
-	publications {
-		register<MavenPublication>("gpr") {
-			from(components["java"])
-		}
-	}
+}
+
+signing {
+	isRequired = true
+	sign(publishing.publications["kafka-topic-config"])
 }
