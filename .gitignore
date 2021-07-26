@@ -36,3 +36,4 @@ subprojects/snowplow/build/**
 subprojects/faker/build/**
 subprojects/airbrake/build/**
 
+/secret.gradle.properties
