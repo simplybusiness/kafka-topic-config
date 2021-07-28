@@ -29,7 +29,7 @@ plugins {
 }
 
 group = "com.simplybusiness"
-version = "1.0.0"
+version = "1.0.11-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 
@@ -91,8 +91,10 @@ publishing {
 			repositories {
 				maven {
 					credentials {
-						username = project.property("ossrhUsername").toString()
-						password = project.property("ossrhPassword").toString()
+//						username = project.property("ossrhUsername").toString()
+//						password = project.property("ossrhPassword").toString()
+						username = System.getenv("OSSRHUSERNAME")
+						password = System.getenv("OSSRPASSWORD")
 					}
 
 					//s01.oss.sonatype.org
@@ -135,7 +137,12 @@ publishing {
 	}
 }
 
+extra["isReleaseVersion"] = !version.toString().endsWith("SNAPSHOT")
+
 signing {
-	isRequired = true
+	setRequired({
+		(project.extra["isReleaseVersion"] as Boolean) && gradle.taskGraph.hasTask("publish")
+	})
 	sign(publishing.publications["kafka-topic-config"])
 }
+
