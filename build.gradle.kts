@@ -48,9 +48,9 @@ dependencies {
 	implementation("com.fasterxml.jackson.core:jackson-annotations:2.12.3")
 
 
-	implementation("org.apache.logging.log4j:log4j-core:2.14.1")
-	implementation("org.apache.logging.log4j:log4j-api:2.14.1")
-	implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.14.1")
+	implementation("org.apache.logging.log4j:log4j-core:2.16.0")
+	implementation("org.apache.logging.log4j:log4j-api:2.16.0")
+	implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.16.0")
 	implementation("commons-io:commons-io:2.8.0")
 	testImplementation("com.salesforce.kafka.test:kafka-junit5:3.2.2")
 	testImplementation("org.apache.kafka:kafka_2.12:2.4.0")
